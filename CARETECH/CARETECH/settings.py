@@ -13,10 +13,24 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 from django.contrib.messages import constants as messages
+import pandas as pd
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_DIR = os.path.join(BASE_DIR, 'chatbot', 'data')
 
+TRAINING_FILE = os.path.join(DATA_DIR, 'Data', 'Training.csv')
+TESTING_FILE = os.path.join(DATA_DIR, 'Data', 'Testing.csv')
+SYMPTOM_SEVERITY_FILE = os.path.join(DATA_DIR, 'MasterData', 'symptom_severity.csv')
+SYMPTOM_DESCRIPTION_FILE = os.path.join(DATA_DIR, 'MasterData', 'symptom_Description.csv')
+SYMPTOM_PRECAUTION_FILE = os.path.join(DATA_DIR, 'MasterData', 'symptom_precaution.csv')
+
+# Load the data
+training_data = pd.read_csv(TRAINING_FILE)
+testing_data = pd.read_csv(TESTING_FILE)
+symptom_severity_data = pd.read_csv(SYMPTOM_SEVERITY_FILE)
+symptom_description_data = pd.read_csv(SYMPTOM_DESCRIPTION_FILE)
+symptom_precaution_data = pd.read_csv(SYMPTOM_PRECAUTION_FILE)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -108,7 +122,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Nairobi'
 
 USE_I18N = True
 
@@ -132,3 +146,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
+# smtp configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'email@email.com'
+EMAIL_HOST_PASSWORD = 'email_password'
+EMAIL_USE_TLS = True

@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import ChatItem, ChatBot
+from .models import Conversation
 
 # Register your models here.
 
-admin.site.register(ChatBot)
-admin.site.register(ChatItem)
+admin.site.register(Conversation)
+
